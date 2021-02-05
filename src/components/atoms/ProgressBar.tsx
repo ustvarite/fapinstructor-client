@@ -1,0 +1,47 @@
+import React, { FC } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+
+interface StyleProps {
+  duration?: number;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100%",
+    width: "100%",
+    position: "relative",
+  },
+  progress: {
+    height: "100%",
+    background: theme.palette.secondary.main,
+    animationName: "$progress",
+    animationTimingFunction: "linear",
+    animationDuration: ({ duration }: StyleProps) => `${duration}ms`,
+  },
+  "@keyframes progress": {
+    from: {
+      width: "0%",
+    },
+    to: {
+      width: "100%",
+    },
+  },
+}));
+
+export interface ProgressBarProps {
+  className?: string;
+  duration: number;
+}
+
+const ProgressBar: FC<ProgressBarProps> = ({ className, duration }) => {
+  const classes = useStyles({ duration });
+
+  return (
+    <div className={classes.root}>
+      <div className={clsx(classes.progress, className)} />
+    </div>
+  );
+};
+
+export default ProgressBar;

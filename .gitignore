@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.idea/
+
+# yarn log files
+yarn-debug.log*
+yarn-error.log*
+
+# We use yarn, so npm files shouldn't exist
+package-lock.json
+npm-debug.log*

@@ -1,0 +1,27 @@
+module.exports = {
+  extends: ["react-app", "plugin:jest/recommended"],
+  plugins: ["import", "testing-library", "jest"],
+  overrides: [
+    {
+      files: ["**/*.*(ts|tsx)"],
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+      plugins: ["@typescript-eslint/eslint-plugin"],
+      extends: [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "eslint-config-prettier/@typescript-eslint",
+      ],
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+      },
+    },
+  ],
+  rules: {
+    // Won't run for storyshots, this rule hardcodes the .snap ext
+    "jest/no-large-snapshots": ["warn", { maxSize: 50, inlineMaxSize: 6 }],
+  },
+};

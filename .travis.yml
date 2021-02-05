@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "10"
+before_install:
+  - pip install --user --upgrade pip
+  - pip install --user awscli
+cache:
+  directories:
+    - client/node_modules
+script:
+  - scripts/build.sh
+deploy:
+  - provider: script
+    script: scripts/deploy.sh
+    skip_cleanup: true
+    on:
+      branch: master
