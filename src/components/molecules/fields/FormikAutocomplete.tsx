@@ -64,9 +64,9 @@ export default function FormikAutocomplete({
     <Autocomplete
       {...autoCompleteProps}
       value={fieldValue}
-      onChange={(event, values: string[]) =>
-        setFieldValue(fieldName, formatValues(values))
-      }
+      onChange={(event, values: string[]) => {
+        setFieldValue(fieldName, formatValues(values));
+      }}
       onInputChange={(event, value, reason) => {
         if (breakSpaces) {
           const trailingSpace = /\S\s$/.test(value);

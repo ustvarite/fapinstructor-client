@@ -44,9 +44,18 @@ export default function AutoFocusFieldErrors({
   React.useEffect(() => {
     if (!formik.isValid && shouldFocus && formik.touched) {
       const firstErrorKey = getFirstErrorKey(formik.errors);
+
       if (global.window.document.getElementsByName(firstErrorKey).length) {
         // Disable autofocus after the focusing the first field.
         setShouldFocus(false);
+
+        const elementToFocus =
+          global.window.document.getElementsByName(firstErrorKey)[0];
+
+        // TODO: Fix the auto-focusing so that it works for checkboxes.  This still doesn't work for autocomplete.
+        elementToFocus.scrollIntoView({ block: "center" });
+        elementToFocus.focus();
+
         global.window.document.getElementsByName(firstErrorKey)[0].focus();
       }
     }
