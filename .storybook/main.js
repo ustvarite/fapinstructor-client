@@ -3,7 +3,13 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app",
+    "storybook-preset-craco",
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        configureJSX: true,
+      },
+    },
   ],
   typescript: {
     check: true,
