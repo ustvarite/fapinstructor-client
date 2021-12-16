@@ -54,7 +54,10 @@ export function MediaPlayer({ link, duration, onEnded }: MediaPlayerProps) {
   function repeatForDuration(event: React.ChangeEvent<HTMLVideoElement>) {
     if (event.target.duration * (playCount + 1) < duration) {
       setPlayCount(playCount + 1);
-      event.target.play();
+      event.target.play().catch(() => {
+        // An exception is thrown if the user changes the slide before the video starts playback.
+        // Ref: https://goo.gl/LdLk22
+      });
     } else {
       setPlayCount(0);
       onEnded();
