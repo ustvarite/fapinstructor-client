@@ -179,8 +179,8 @@ export function createActionMachine(config: GameConfig) {
                   callback({ type: "SET_TRIGGERS", triggers });
                 }
               } catch (error) {
-                if (error.reason !== "interrupt") {
-                  console.error(error);
+                if ((error as { reason?: string }).reason !== "interrupt") {
+                  console.error(`Action machine threw an error: ${error}`);
                 }
               }
             },
@@ -214,7 +214,7 @@ export function createActionMachine(config: GameConfig) {
           try {
             interrupt();
           } catch (error) {
-            if (error.reason !== "interrupt") {
+            if ((error as { reason?: string }).reason !== "interrupt") {
               console.error(error);
             }
           }

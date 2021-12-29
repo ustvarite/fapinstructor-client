@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Auth0Provider, AppState } from "@auth0/auth0-react";
 
 import { AUTH_DOMAIN, AUTH_CLIENT_ID, AUTH_AUDIENCE } from "@/config";
@@ -9,10 +9,10 @@ type Auth0ProviderProps = {
 };
 
 export default function AppAuth0Provider({ children }: Auth0ProviderProps) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onRedirectCallback = (appState: AppState) => {
-    history.push(appState.returnTo || window.location.pathname);
+    navigate(appState.returnTo || window.location.pathname);
   };
 
   /**

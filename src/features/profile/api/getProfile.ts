@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { AxiosError } from "axios";
 
 import { axios } from "@/lib/axios";
 import { Profile } from "@/types/Profile";
@@ -17,7 +18,7 @@ export async function getProfile({
     profile = await axios.get(url);
   } catch (error) {
     // If profile doesn't exist, attempt to create it
-    if (error.response?.status === 404) {
+    if ((error as AxiosError).response?.status === 404) {
       profile = await axios.post(url);
     } else {
       throw error;

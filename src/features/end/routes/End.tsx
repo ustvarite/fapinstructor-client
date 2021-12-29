@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
@@ -6,6 +6,7 @@ import store from "@/store";
 import BackgroundImage from "@/assets/images/background.jpg";
 import { SupportSiteBanner } from "@/components/SupportSiteBanner";
 import { Head } from "@/components/Head";
+import { NavBar } from "@/components/NavBar";
 
 import { BookmarkList } from "../components/BookmarkList";
 
@@ -24,35 +25,38 @@ const useStyles = makeStyles({
 
 export function End() {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   if (!store.game) {
     // If the page is refreshed, we lose game state, so redirect to home
-    history.push("/");
+    navigate("/");
     return null;
   }
 
   return (
-    <div className={classes.root}>
-      <Head title="End" />
-      <SupportSiteBanner />
-      <br />
-      <Typography
-        gutterBottom
-        variant="h2"
-        style={{ fontFamily: "'Damion', cursive" }}
-      >
-        The End
-      </Typography>
-      <Typography variant="h6" noWrap gutterBottom>
-        Bookmarks
-      </Typography>
-      <BookmarkList
-        bookmarks={store.game.bookmarks.map((bookmark) => ({
-          href: bookmark.href,
-          src: bookmark.src,
-        }))}
-      />
-    </div>
+    <>
+      <NavBar />
+      <div className={classes.root}>
+        <Head title="End" />
+        <SupportSiteBanner />
+        <br />
+        <Typography
+          gutterBottom
+          variant="h2"
+          style={{ fontFamily: "'Damion', cursive" }}
+        >
+          The End
+        </Typography>
+        <Typography variant="h6" noWrap gutterBottom>
+          Bookmarks
+        </Typography>
+        <BookmarkList
+          bookmarks={store.game.bookmarks.map((bookmark) => ({
+            href: bookmark.href,
+            src: bookmark.src,
+          }))}
+        />
+      </div>
+    </>
   );
 }

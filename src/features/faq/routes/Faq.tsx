@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 
 import { PUBLIC_URL } from "@/config";
+import { NavBar } from "@/components/NavBar";
 import { Page } from "@/components/Templates";
 import { Head } from "@/components/Head";
 
@@ -18,9 +19,12 @@ export function Faq() {
   }, []);
 
   return (
-    <Page className="markdown-body">
-      <Head title="FAQ" />
-      <ReactMarkdown>{changeLogMD}</ReactMarkdown>
-    </Page>
+    <>
+      <NavBar />
+      <Page className="markdown-body">
+        <Head title="FAQ" />
+        <ReactMarkdown>{changeLogMD}</ReactMarkdown>
+      </Page>
+    </>
   );
 }

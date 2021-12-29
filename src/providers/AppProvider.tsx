@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Router } from "react-router-dom";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Typography } from "@material-ui/core";
@@ -51,7 +51,7 @@ export function AppProvider({ children }: AppProviderProps) {
     <Sentry.ErrorBoundary fallback={FallbackComponent}>
       <QueryClientProvider client={queryClient}>
         {process.env.NODE_ENV !== "test" && <ReactQueryDevtools />}
-        <Router history={history}>
+        <HistoryRouter history={history}>
           <Suspense
             fallback={
               <>
@@ -77,7 +77,7 @@ export function AppProvider({ children }: AppProviderProps) {
               </Auth0Provider>
             </Provider>
           </Suspense>
-        </Router>
+        </HistoryRouter>
       </QueryClientProvider>
     </Sentry.ErrorBoundary>
   );

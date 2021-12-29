@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import "github-markdown-css";
 
+import { NavBar } from "@/components/NavBar";
 import { PUBLIC_URL } from "@/config";
 import { Page } from "@/components/Templates";
 import { Head } from "@/components/Head";
@@ -18,9 +19,12 @@ export function ChangeLog() {
   }, []);
 
   return (
-    <Page className="markdown-body">
-      <Head title="Change Log" />
-      <ReactMarkdown>{changeLogMD}</ReactMarkdown>
-    </Page>
+    <>
+      <NavBar />
+      <Page className="markdown-body">
+        <Head title="Change Log" />
+        <ReactMarkdown>{changeLogMD}</ReactMarkdown>
+      </Page>
+    </>
   );
 }

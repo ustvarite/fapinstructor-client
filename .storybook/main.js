@@ -1,8 +1,6 @@
 module.exports = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "storybook-preset-craco",
     {
       name: "@storybook/addon-docs",
@@ -10,7 +8,12 @@ module.exports = {
         configureJSX: true,
       },
     },
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
   ],
+  core: {
+    builder: "webpack5",
+  },
   typescript: {
     check: true,
     checkOptions: {},

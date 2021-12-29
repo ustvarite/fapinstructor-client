@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import store from "@/store";
@@ -46,7 +46,7 @@ export function ShareGame({ open, onClose }: ShareGameProps) {
   const inputLink = React.useRef<HTMLInputElement>();
   const [copyToolTipOpen, setCopyToolTipOpen] = React.useState(false);
   const [gameId, setGameId] = React.useState<string>();
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const handleSubmit = async (values: CreateGameDTO) => {
@@ -72,7 +72,7 @@ export function ShareGame({ open, onClose }: ShareGameProps) {
   };
 
   const handleStartGame = () => {
-    history.push(`/game/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   const handleToolTipOpen = () => {

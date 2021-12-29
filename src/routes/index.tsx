@@ -1,12 +1,6 @@
-/**
- * TODO: Refactor the routes to use a config instead of React Elements.  This will
- * give the ability to create more dynamic routes in the future.
- * https://reactrouter.com/web/example/route-config
- */
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes, Outlet } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { NavBar } from "@/components/NavBar";
 import { lazyImport } from "@/utils/lazyImport";
 
 // prettier-ignore
@@ -21,28 +15,28 @@ const { Faq } = lazyImport(() => import("@/features/faq"), "Faq");
 const { Search } = lazyImport(() => import("@/features/search"), "Search");
 const { Profile } = lazyImport(() => import("@/features/profile"), "Profile");
 
-export function AppRoutes() {
+function PrivateRoute() {
   const { user } = useAuth0();
 
-  const protectedRoutes = <Route path="/profile" component={Profile} />;
+  return user ? <Outlet /> : <Navigate to="/" />;
+}
 
+export function AppRoutes() {
   return (
-    <>
-      <Switch>
-        <Route exact path="/game/:config?" />
-        <Route path="/" component={NavBar} />
-      </Switch>
-      <Switch>
-        <Route path="/games" component={Search} />
-        <Route exact path="/game/:config?" component={Game} />
-        <Route exact path="/changelog" component={ChangeLog} />
-        <Route exact path="/privacy" component={PrivacyPolicy} />
-        <Route exact path="/faq" component={Faq} />
-        <Route exact path="/endgame" component={End} />
-        <Route exact path="/" component={GameConfig} />
-        {user && protectedRoutes}
-        <Redirect to="/" />
-      </Switch>
-    </>
+    <Routes>
+      <Route path="games/*" element={<Search />} />
+      <Route path="game">
+        <Route path=":config" element={<Game />} />
+        <Route path="" element={<Game />} />
+      </Route>
+      <Route path="changelog" element={<ChangeLog />} />
+      <Route path="privacy" element={<PrivacyPolicy />} />
+      <Route path="faq" element={<Faq />} />
+      <Route path="endgame" element={<End />} />
+      <Route path="" element={<GameConfig />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
 }

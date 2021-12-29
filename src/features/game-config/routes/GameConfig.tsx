@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, Button, Typography } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import styled from "styled-components/macro";
 
@@ -14,6 +14,7 @@ import { AutoFocusFieldErrors } from "@/components/Form";
 import { Stack, Cluster } from "@/components/Templates";
 import { SupportSiteBanner } from "@/components/SupportSiteBanner";
 import { Head } from "@/components/Head";
+import { NavBar } from "@/components/NavBar";
 
 import { GAME_CONFIG_SCHEMA } from "../schemas/GAME_CONFIG_SCHEMA";
 import { ShareGame } from "../components/ShareGame";
@@ -46,12 +47,13 @@ const StyledForm = styled(Form)`
 `;
 
 export function GameConfig() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const [open, setOpen] = React.useState(false);
 
   return (
     <>
+      <NavBar />
       <Head title="Config" />
       <Formik<GameConfigType>
         initialValues={store.config}
@@ -89,7 +91,7 @@ export function GameConfig() {
                         color="primary"
                         onClick={async () => {
                           await submitForm();
-                          isValid && history.push("/game");
+                          isValid && navigate("/game");
                         }}
                       >
                         Start

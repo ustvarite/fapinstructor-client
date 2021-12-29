@@ -8,8 +8,8 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
-import { useHistory } from "react-router-dom";
 
+import history from "@/browserHistory";
 import { RouteButton } from "@/components/Elements";
 import { ConnectHandy } from "@/features/handy";
 import { Grow, MenuItem } from "@/components/Templates";
@@ -70,13 +70,12 @@ const useBurgerStyles = makeStyles((theme) => ({
 function BurgerMenu() {
   const [open, setOpen] = React.useState(false);
   const classes = useBurgerStyles();
-  const history = useHistory();
 
   React.useEffect(() => {
     history.listen(() => {
       setOpen(false);
     });
-  }, [history]);
+  }, []);
 
   return (
     <div className={classes.burgerMenu}>

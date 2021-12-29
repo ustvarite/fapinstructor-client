@@ -24,6 +24,10 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
   // If the user is authenticated then attach the token to all subsequent requests.
   React.useEffect(() => {
     const interceptor = axios.interceptors.request.use(async (config) => {
+      if (!config.headers) {
+        config.headers = {};
+      }
+
       if (user && !isLoading && isAuthenticated) {
         const token = await getAccessTokenSilently();
 

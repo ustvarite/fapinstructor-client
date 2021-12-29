@@ -22,6 +22,7 @@ import { createNotification } from "@/game/engine/notification";
 import { Severity } from "@/stores/notifications";
 import useStickyState from "@/hooks/useStickyState";
 import useForceUpdate from "@/hooks/useForceUpdate";
+import { getErrorMessage } from "@/utils/errorHandler";
 
 import { handy } from "../../api/handy";
 
@@ -169,7 +170,7 @@ export function ConnectHandy({ variant = "normal" }: ConnectHandyProps) {
               handy.subscribe(observeHandyConnection);
             } catch (error) {
               setErrors({
-                connectionKey: error.message,
+                connectionKey: getErrorMessage(error),
               });
             }
           }}

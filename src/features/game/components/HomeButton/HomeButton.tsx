@@ -1,13 +1,13 @@
 import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tooltip } from "@material-ui/core";
 
 export function HomeButton() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    history.push("/");
+    navigate("/");
   };
 
   return (

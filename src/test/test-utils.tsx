@@ -6,7 +6,6 @@ import {
   RenderOptions,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
-import { MemoryRouter as Router } from "react-router-dom";
 
 import Auth0TestProvider, { Auth } from "@/providers/Auth0TestProvider";
 import store from "@/stores";
@@ -34,9 +33,7 @@ export function render(
     return (
       <Provider store={store}>
         <Auth0TestProvider {...auth}>
-          <Router initialEntries={[route]}>
-            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-          </Router>
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </Auth0TestProvider>
       </Provider>
     );

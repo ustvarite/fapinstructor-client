@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Sentry from "@sentry/react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
@@ -17,7 +17,7 @@ import { YouTubeVideo } from "@/components/YouTubeVideo";
 import { Head } from "@/components/Head";
 
 import { ErrorCard } from "../components/ErrorCard";
-import ExitGamePrompt from "../components/ExitGamePrompt";
+// import ExitGamePrompt from "../components/ExitGamePrompt";
 import { SoloGameCard } from "../components/SoloGameCard";
 import SharedGameCard from "../components/SharedGameCard";
 import { HUD } from "../components/HUD";
@@ -59,10 +59,7 @@ function handleSlideChange() {
 
 export function Game() {
   const params = useParams<{ config?: string }>();
-  const history = useHistory();
-  const location = useLocation<{
-    configured: true;
-  }>();
+  const location = useLocation();
   const classes = useStyles();
   const [gameStarted, setGameStarted] = React.useState(false);
   const [error, setError] = React.useState<string>();
@@ -94,7 +91,7 @@ export function Game() {
     return () => {
       gameStarted && stopServices();
     };
-  }, [history, location, params, gameStarted, gameConfigId]);
+  }, [location, params, gameStarted, gameConfigId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -149,7 +146,7 @@ export function Game() {
 
           return (
             <div className={classes.container}>
-              <ExitGamePrompt />
+              {/*<ExitGamePrompt />*/}
               <HUD gameId={gameConfigId} />
               {(youtube && <YouTubeVideo src={youtube} />) ||
                 (activeLink && (

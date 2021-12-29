@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { Head } from "@/components/Head";
 import { Page } from "@/components/Templates";
+import { NavBar } from "@/components/NavBar";
 
 import { ProfileCard } from "../components/ProfileCard";
 import { DeleteProfileModal } from "../components/DeleteProfileModal";
@@ -19,27 +20,30 @@ export function Profile() {
   }
 
   return (
-    <Page>
-      <Head title="Profile" />
-      <Box mb={2}>
-        <ProfileCard user={user} />
-      </Box>
-      <DeleteProfileModal
-        open={deleteModalOpen}
-        onCancel={() => setDeleteModalOpen(false)}
-        onConfirm={() => {
-          setDeleteModalOpen(false);
-          deleteProfileMutation.mutate();
-        }}
-      />
-      <Button
-        variant="outlined"
-        onClick={() => {
-          setDeleteModalOpen(true);
-        }}
-      >
-        Delete Account
-      </Button>
-    </Page>
+    <>
+      <NavBar />
+      <Page>
+        <Head title="Profile" />
+        <Box mb={2}>
+          <ProfileCard user={user} />
+        </Box>
+        <DeleteProfileModal
+          open={deleteModalOpen}
+          onCancel={() => setDeleteModalOpen(false)}
+          onConfirm={() => {
+            setDeleteModalOpen(false);
+            deleteProfileMutation.mutate();
+          }}
+        />
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setDeleteModalOpen(true);
+          }}
+        >
+          Delete Account
+        </Button>
+      </Page>
+    </>
   );
 }
