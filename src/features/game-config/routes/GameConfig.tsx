@@ -98,7 +98,7 @@ export function GameConfig() {
           );
         }}
       </Formik>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
