@@ -11,7 +11,7 @@ import { MediaType } from "@/types/Media";
 import { Group } from "@/components/Group";
 
 import RedditSelectionField from "./components/RedditSelectionField";
-import RedGifsSelectionField from "./components/RedGifsSelectionField";
+// import RedGifsSelectionField from "./components/RedGifsSelectionField";
 import SlideDurationField from "./components/SlideDurationField";
 
 export default function MediaStep() {
@@ -19,7 +19,7 @@ export default function MediaStep() {
 
   return (
     <Group title="Media">
-      <RedGifsSelectionField />
+      {/* <RedGifsSelectionField /> */}
       <RedditSelectionField />
       <FormControl component="fieldset" required error={Boolean(meta.error)}>
         <FormLabel component="legend">Media Type</FormLabel>
