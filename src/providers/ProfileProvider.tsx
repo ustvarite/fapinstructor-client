@@ -31,9 +31,11 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
       if (user && !isLoading && isAuthenticated) {
         const token = await getAccessTokenSilently();
 
+        // @ts-expect-error TODO: Make this properly typed.
         config.headers.Authorization = `Bearer ${token}`;
       }
 
+      // @ts-expect-error TODO: Make this properly typed.
       config.headers.Accept = "application/json";
 
       return config;

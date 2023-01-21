@@ -11,6 +11,7 @@ import { MediaType } from "@/types/Media";
 import { Group } from "@/components/Group";
 
 import RedditSelectionField from "./components/RedditSelectionField";
+import RedGifsSelectionField from "./components/RedGifsSelectionField";
 import SlideDurationField from "./components/SlideDurationField";
 
 export default function MediaStep() {
@@ -18,8 +19,8 @@ export default function MediaStep() {
 
   return (
     <Group title="Media">
+      <RedGifsSelectionField />
       <RedditSelectionField />
-      <SlideDurationField />
       <FormControl component="fieldset" required error={Boolean(meta.error)}>
         <FormLabel component="legend">Media Type</FormLabel>
         <FormGroup>
@@ -45,8 +46,12 @@ export default function MediaStep() {
             Label={{ label: "Videos" }}
           />
         </FormGroup>
+        <FormHelperText>
+          Selecting a media type only affects Subreddits results.
+        </FormHelperText>
         <FormHelperText>{meta.error}</FormHelperText>
       </FormControl>
+      <SlideDurationField />
     </Group>
   );
 }

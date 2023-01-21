@@ -1,13 +1,16 @@
 import * as Sentry from "@sentry/react";
 import { useService } from "@xstate/react";
 import { interpret, InterpreterFrom } from "xstate";
+import shuffle from "lodash/shuffle";
 
 import {
   createMediaMachine,
   MediaMachine,
 } from "@/game/xstate/machines/mediaMachine";
 import { GameConfig } from "@/configureStore";
+import { MediaLink } from "@/types/Media";
 import { getLocalMediaLinks } from "@/features/file-system";
+import { searchRedGifs } from "@/api/redgifs/redgifs";
 
 import fetchRedditPics from "../api/fetchRedditPics";
 
@@ -70,12 +73,24 @@ const MediaService = {
         gameConfig.slideDuration
       );
 
-      getMediaLinks = () => {
-        return fetchRedditPics({
-          subreddits: gameConfig.subreddits,
-          limit: estimatedRequiredLinkCount,
-          mediaTypes: gameConfig.imageType,
-        });
+      getMediaLinks = async () => {
+        const links: MediaLink[] = [];
+        if (gameConfig.redgifs.length > 0) {
+          links.push(...(await searchRedGifs(...gameConfig.redgifs)));
+        }
+
+        if (gameConfig.subreddits.length > 0) {
+          const redditLinks = await fetchRedditPics({
+            subreddits: gameConfig.subreddits,
+            limit: estimatedRequiredLinkCount,
+            mediaTypes: gameConfig.imageType,
+          });
+          if (redditLinks) {
+            links.push(...redditLinks);
+          }
+        }
+
+        return shuffle(links);
       };
     }
 

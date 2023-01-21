@@ -15,6 +15,7 @@ const store = {
     cooldown: false,
   },
   config: {
+    redgifs: ["onlyfans"],
     subreddits: [
       "gonewild",
       "nsfw",

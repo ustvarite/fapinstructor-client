@@ -71,6 +71,7 @@ export type Task =
   | NippleTasks;
 
 export type GameConfig = {
+  redgifs: string[];
   subreddits: string[];
   slideDuration: number;
   imageType: MediaType[];
@@ -112,6 +113,7 @@ export type GameConfig = {
 };
 
 const defaultConfig: GameConfig = {
+  redgifs: ["onlyfans"],
   subreddits: [
     "gonewild",
     "nsfw",
