@@ -113,7 +113,7 @@ export type GameConfig = {
 };
 
 const defaultConfig: GameConfig = {
-  redgifs: ["onlyfans"],
+  redgifs: [],
   subreddits: [
     "gonewild",
     "nsfw",
