@@ -75,11 +75,11 @@ const MediaService = {
 
       getMediaLinks = async () => {
         const links: MediaLink[] = [];
-        if (gameConfig.redgifs.length > 0) {
+        if (gameConfig.redgifs?.length) {
           links.push(...(await searchRedGifs(...gameConfig.redgifs)));
         }
 
-        if (gameConfig.subreddits.length > 0) {
+        if (gameConfig.subreddits?.length) {
           const redditLinks = await fetchRedditPics({
             subreddits: gameConfig.subreddits,
             limit: estimatedRequiredLinkCount,
