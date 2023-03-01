@@ -9,10 +9,9 @@ import store from "@/store";
 import { GameConfig as GameConfigType } from "@/configureStore";
 import theme from "@/theme";
 import { ButtonWithHelperText } from "@/components/Elements";
-// import { Footer } from "@/components/Footer";
+import { Affiliates } from "@/components/Affiliates";
 import { AutoFocusFieldErrors } from "@/components/Form";
 import { Stack, Cluster } from "@/components/Templates";
-import { SupportSiteBanner } from "@/components/SupportSiteBanner";
 import { Head } from "@/components/Head";
 import { NavBar } from "@/components/NavBar";
 
@@ -48,7 +47,7 @@ export function GameConfig() {
             <AutoFocusFieldErrors>
               <StyledForm>
                 <Stack>
-                  <SupportSiteBanner />
+                  <Affiliates />
                   <Typography variant="h2" component="h1" color="secondary">
                     Create a game
                   </Typography>
@@ -98,7 +97,6 @@ export function GameConfig() {
           );
         }}
       </Formik>
-      {/* <Footer /> */}
     </>
   );
 }

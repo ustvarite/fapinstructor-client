@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Box, Button, CircularProgress } from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
 
+import { SupportSiteBanner } from "@/components/SupportSiteBanner";
 import { NodeRow } from "@/components/Templates";
 import store from "@/store";
 import deepCopy from "@/utils/deepCopy";
@@ -55,31 +56,35 @@ export default function SharedGameCard({
   const game = gameQuery.data;
 
   return (
-    <GameSummaryCard game={game}>
-      <NodeRow>
-        <StarButton
-          gameId={game.id}
-          stars={game.stars}
-          starred={game.starred}
-          variant="outlined"
-        />
-        <Button
-          onClick={() => {
-            if (user?.sub && game) {
-              appendGameHistoryMutation.mutate({
-                gameId: game.id,
-                userId: user.sub,
-              });
-            }
-            onStart(game);
-          }}
-          variant="contained"
-          color="primary"
-        >
-          start game
-        </Button>
-        <BackToConfigButton />
-      </NodeRow>
-    </GameSummaryCard>
+    <>
+      <GameSummaryCard game={game}>
+        <NodeRow>
+          <StarButton
+            gameId={game.id}
+            stars={game.stars}
+            starred={game.starred}
+            variant="outlined"
+          />
+          <Button
+            onClick={() => {
+              if (user?.sub && game) {
+                appendGameHistoryMutation.mutate({
+                  gameId: game.id,
+                  userId: user.sub,
+                });
+              }
+              onStart(game);
+            }}
+            variant="contained"
+            color="primary"
+          >
+            start game
+          </Button>
+          <BackToConfigButton />
+        </NodeRow>
+      </GameSummaryCard>
+
+      <SupportSiteBanner />
+    </>
   );
 }
