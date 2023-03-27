@@ -3,7 +3,7 @@ import { assign, createMachine, send } from "xstate";
 import type { GameConfig } from "@/configureStore";
 import store from "@/stores";
 import { selectSettings } from "@/stores/settings";
-import { playTick } from "@/game/engine/audio";
+import { playCommand, playTick } from "@/game/engine/audio";
 import { TICK_DELAY } from "@/config";
 import { handy } from "@/features/handy";
 import { getAverageStrokeSpeed } from "@/game/utils/strokeSpeed";
@@ -153,9 +153,17 @@ export function createStrokeMachine(config: GameConfig) {
     },
     {
       actions: {
-        setStrokeSpeed: assign((context, event) => ({
-          strokeSpeed: (event as SetStrokeSpeedEvent).speed,
-        })),
+        setStrokeSpeed: assign((context, event) => {
+          const speed = (event as SetStrokeSpeedEvent).speed;
+
+          if (speed >= context.strokeSpeed * 2) {
+            playCommand("faster");
+          }
+
+          return {
+            strokeSpeed: speed,
+          };
+        }),
         setStrokeSpeedBaseline: assign((context, event) => ({
           strokeSpeedBaseline: (event as SetStrokeSpeedBaselineEvent).speed,
         })),

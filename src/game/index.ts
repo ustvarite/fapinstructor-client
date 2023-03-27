@@ -2,6 +2,7 @@
  * The entry point to kick start and configure the game
  */
 
+import { dismissAllNotifications } from "@/game/engine/notification";
 import { gameLoopObservable } from "@/game/engine/loop";
 import interrupt from "@/game/engine/interrupt";
 import { createAudioContext } from "@/game/engine/audio";
@@ -55,6 +56,7 @@ export async function startServices() {
 
 export function stopServices() {
   interrupt();
+  dismissAllNotifications();
 
   if (handy.connected) {
     handy.reset();

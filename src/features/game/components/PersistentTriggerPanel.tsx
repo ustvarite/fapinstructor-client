@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 
 import store from "@/store";
 import useWindowEvent from "@/hooks/useWindowEvent";
+import { dismissAllNotifications } from "@/game/engine/notification";
 import { ActionService } from "@/game/xstate/services";
 import { ProxyStoreConsumer } from "@/providers/ProxyStoreProvider";
 import { edged } from "@/game/actions/orgasm/edge";
@@ -32,10 +33,12 @@ export default React.memo(function PersistentTriggerPanel() {
 
     switch (event.key) {
       case "r": {
+        dismissAllNotifications();
         ActionService.execute(accidentallyRuined);
         break;
       }
       case "e": {
+        dismissAllNotifications();
         ActionService.execute(edged);
         break;
       }

@@ -98,27 +98,11 @@ export function createGripMachine(config: GameConfig) {
             },
             LOOSEN_GRIP_STRENGTH: {
               cond: "canLoosenGripStrength",
-              actions: [
-                "loosenGripStrength",
-                ({ gripStrength }) =>
-                  createNotification({
-                    message: `Loosen your grip so it's ${
-                      GripStrengthString[(gripStrength - 1) as GripStrength]
-                    }`,
-                  }),
-              ],
+              actions: ["loosenGripStrength", "showGripNotification"],
             },
             TIGHTEN_GRIP_STRENGTH: {
               cond: "canTightenGripStrength",
-              actions: [
-                "tightenGripStrength",
-                ({ gripStrength }) =>
-                  createNotification({
-                    message: `Tighten your grip so it's ${
-                      GripStrengthString[(gripStrength + 1) as GripStrength]
-                    }`,
-                  }),
-              ],
+              actions: ["tightenGripStrength", "showGripNotification"],
             },
           },
         },
@@ -150,12 +134,13 @@ export function createGripMachine(config: GameConfig) {
               });
               break;
             }
-            case "SET_GRIP_STRENGTH": {
-              const gripStrength = (event as SetGripStrengthEvent).strength;
-
+            default: {
               createNotification({
-                message: `Change your grip so it's ${GripStrengthString[gripStrength]}`,
+                message: `Change your grip so it's ${GripStrengthString[
+                  context.gripStrength
+                ].toLowerCase()}`,
               });
+              break;
             }
           }
         },

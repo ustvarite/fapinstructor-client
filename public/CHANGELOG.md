@@ -4,6 +4,12 @@ All notable changes to this project will be documented here.
 
 The overall project roadmap and progress can be viewed on our [Trello Board](https://trello.com/b/JAIcnXRf/fap-instructor)
 
+## 2023-03-26
+
+- Fixed grip undefined notification bug.
+- Fixed image height so scroll bars don't appear.
+- Make the starting stroke speed slower.
+
 ## 2022-01-09
 
 - Added local file system selector (only available in supported browsers)

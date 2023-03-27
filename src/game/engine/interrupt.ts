@@ -1,5 +1,3 @@
-import { dismissAllNotifications } from "@/game/engine/notification";
-
 type Interruptible = {
   id: number;
   reject: (props: { reason: string }) => void;
@@ -17,6 +15,5 @@ export default function interrupt() {
     clearTimeout(id);
     reject({ reason: "interrupt" });
   });
-  dismissAllNotifications();
   interruptibles = [];
 }

@@ -1,5 +1,4 @@
 import { StrokeService } from "@/game/xstate/services";
-import { getRandomStrokeSpeed } from "@/game/utils/strokeSpeed";
 import {
   createNotification,
   dismissNotification,
@@ -7,8 +6,6 @@ import {
 import { delay } from "@/game/engine/delay";
 
 const warmup = async () => {
-  const strokeSpeed = getRandomStrokeSpeed({ fast: getRandomStrokeSpeed() });
-
   const warmup = async () => {
     StrokeService.play();
     const segment1 = 30 * 1000;
@@ -30,13 +27,13 @@ const warmup = async () => {
 
     await delay(1000);
 
-    StrokeService.setStrokeSpeed(strokeSpeed);
+    StrokeService.setStrokeSpeed(0.25);
   };
   warmup.label = "Warm up";
 
   const ready = async () => {
     StrokeService.play();
-    StrokeService.setStrokeSpeed(strokeSpeed);
+    StrokeService.setStrokeSpeed(0.75);
   };
   ready.label = "I'm Ready!";
 

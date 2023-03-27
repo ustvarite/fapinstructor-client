@@ -1,5 +1,4 @@
 import { createNotification } from "@/game/engine/notification";
-import { playCommand } from "@/game/engine/audio";
 import { delay } from "@/game/engine/delay";
 import { StrokeService } from "@/game/xstate/services";
 import { setStrokeSpeed } from "@/game/utils/strokeSpeed";
@@ -17,7 +16,6 @@ export const doubleStrokes = async () => {
     delay: true,
   });
 
-  playCommand("faster");
   setStrokeSpeed(StrokeService.strokeSpeed * 2);
 
   await delay(duration);
