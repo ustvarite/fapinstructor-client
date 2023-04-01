@@ -8,7 +8,7 @@ if (
   Sentry.init({
     allowUrls: [/https?:\/\/(www\.)?fapinstructor\.com/],
     integrations: [new TracingIntegrations.BrowserTracing()],
-    tracesSampleRate: 0.1,
+    tracesSampleRate: 0.01,
     dsn: process.env.REACT_APP_SENTRY_DSN,
     release: process.env.REACT_APP_SENTRY_RELEASE,
     environment: process.env.NODE_ENV,
