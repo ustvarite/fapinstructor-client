@@ -31,17 +31,26 @@ jobs:
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-
       - name: Create Sentry release
-        uses: tclindner/sentry-releases-action@v1.2.0
+        uses: getsentry/action-release@v1
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: fapinstructor
           SENTRY_PROJECT: fapinstructor
         with:
-          tagName: ${{ steps.vars.outputs.sha_short }}
           environment: production
-          sourceMapOptions: '{"include": ["build/static/js"], "urlPrefix": "~/static/js", "rewrite": false}'
+          sourcemaps: "build/static/js"
+
+      # - name: Create Sentry release
+      #   uses: tclindner/sentry-releases-action@v1.2.0
+      #   env:
+      #     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      #     SENTRY_ORG: fapinstructor
+      #     SENTRY_PROJECT: fapinstructor
+      #   with:
+      #     tagName: ${{ steps.vars.outputs.sha_short }}
+      #     environment: production
+      #     sourceMapOptions: '{"include": ["build/static/js"], "urlPrefix": "~/static/js", "rewrite": false}'
 
       - name: Deploy
         uses: reggionick/s3-deploy@v3
