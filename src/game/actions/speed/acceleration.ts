@@ -4,6 +4,7 @@ import { setStrokeSpeed } from "@/game/utils/strokeSpeed";
 import { delay } from "@/game/engine/delay";
 import { playCommand } from "@/game/engine/audio";
 import { StrokeService } from "@/game/xstate/services";
+import { selectSettings } from "@/stores/settings";
 
 export const acceleration = async () => {
   const previousStrokeSpeed = StrokeService.strokeSpeed;
@@ -16,6 +17,7 @@ export const acceleration = async () => {
   setStrokeSpeed(store.config.strokeSpeed.min);
 
   let audioPlayed = false;
+  const settings = selectSettings(store.getState());
 
   while (StrokeService.strokeSpeed < store.config.strokeSpeed.max) {
     setStrokeSpeed(StrokeService.strokeSpeed * 1.05);
@@ -23,7 +25,8 @@ export const acceleration = async () => {
 
     if (
       !audioPlayed &&
-      StrokeService.strokeSpeed > store.config.strokeSpeed.max / 3
+      StrokeService.strokeSpeed > store.config.strokeSpeed.max / 3 &&
+      settings.moans
     ) {
       playCommand("longMoan");
       audioPlayed = true;
